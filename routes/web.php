@@ -10,7 +10,7 @@ Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::prefix('short')->middleware('auth')->group(function () {
     Route::get('/short-urls', [ShortUrlController::class, 'index'])->name('short-urls.index');
     Route::post('/short-urls/store', [ShortUrlController::class, 'store'])->name('short-urls.store');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

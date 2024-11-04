@@ -39,7 +39,7 @@ class ShortUrlController extends Controller
             ]);
             return response()->json(["success"=>true, "data"=>$data,"message"=>"Successfully Created Shorturl"],201);
         }catch(\Exception $e){
-            dd($e);
+            // dd($e);
             return response()->json(["success"=>false,"message"=>"Failed to shorten url"]);
         }
         
@@ -55,7 +55,8 @@ class ShortUrlController extends Controller
             $url->Number_of_clicks=$url->Number_of_clicks+1;
             $url->save(); 
             // Redirect to the original URL
-            return redirect()->away($url->original_url);
+            // return redirect()->away($url->original_url);
+            return view('redirect', ['url' => $url->original_url]);
         }else{
             return view('errors.404');  
         }

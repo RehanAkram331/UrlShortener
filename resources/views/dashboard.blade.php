@@ -11,11 +11,35 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="mt-4">
                         @csrf
-                        <x-input-label for="url" :value="__('Url')" />
-                        <x-text-input id="url" class="block mt-1 w-full"
-                                    type="url"
-                                    name="url"
-                                    />
+                        <div class="flex mb-3">
+                            <lable class="dark:bg-gray-700 bg-teal-400  
+                                border border-gray-300 px-4 py-2 
+                                rounded-l-md bg-white
+                                focus:outline-none focus:ring-2 focus:ring-indigo-500 
+                                focus:border-indigo-500"  for="url">
+                                Url
+                            </lable>
+                            <input type="text" 
+                                class="form-input border  
+                                px-3 py-2 
+                                border-gray-300 dark:border-gray-700 
+                                dark:bg-gray-900 dark:text-gray-300 
+                                focus:border-indigo-500 dark:focus:border-indigo-600 
+                                focus:ring-indigo-500 dark:focus:ring-indigo-600 
+                                rounded-md shadow-sm block w-full" 
+                                id="url"
+                                type="url"
+                                name="url">
+                            <button class="storeUrl btn 
+                                bg-[#2c87c5]
+                                border border-gray-300 px-3 py-2 
+                                rounded-r-md
+                                focus:outline-none focus:ring-2 focus:ring-indigo-500 
+                                focus:border-indigo-500" 
+                                type="button">
+                                Short
+                            </button>
+                        </div> 
                     </div>
                     <div class="flex items-start justify-start mt-4" id="shortUrl">
 
@@ -60,26 +84,94 @@ $(document).ready(function() {
                 if(data?.success){
                     const status = jqXHR.status;
                     if(status == 201){
-                       $('#Urldata').append(`
-                        <div class="mt-4 p-2 flex rounded-lg h-full dark:bg-gray-700 bg-teal-400 flex-col">
-                           <div class="w-full text-wrap overflow-hidden ">
-                                <x-input-label :value="__('Original Url:')" />
-                                <x-text-input class="block mt-1 w-full"
-                                    value="${data?.data?.original_url}"
-                                    readonly
-                                />
-                            </div> 
-                            <div class="w-full text-wrap overflow-hidden ">
-                                <x-input-label :value="__('Short Url:')" />
-                                <x-text-input class="block mt-1 w-full"
-                                        value="${host}/${data?.data?.short_url}"
-                                        readonly
-                                    />
-                                </div> 
-                            <div>Number of Clicks: ${data?.data?.Number_of_clicks}</div>
-                        </div>`); 
+                       $('#Urldata').append(`                                       
+                            <div class="mt-4 p-2 flex rounded-lg h-full dark:bg-gray-700 bg-teal-400 flex-col">
+                                    <div class="flex mb-3">
+                                        <lable class="dark:bg-gray-700 bg-teal-400  
+                                            border border-gray-300 px-4 py-2 
+                                            rounded-l-md bg-white
+                                            focus:outline-none focus:ring-2 focus:ring-indigo-500 
+                                            focus:border-indigo-500" >
+                                            OriginalUrl:
+                                        </lable>
+                                        <input type="text" 
+                                            class="originalUrl form-input border  
+                                            px-3 py-2 
+                                            border-gray-300 dark:border-gray-700 
+                                            dark:bg-gray-900 dark:text-gray-300 
+                                            focus:border-indigo-500 dark:focus:border-indigo-600 
+                                            focus:ring-indigo-500 dark:focus:ring-indigo-600 
+                                            rounded-md shadow-sm block w-full" 
+                                            value="${data?.data?.original_url}"
+                                            readonly>
+                                        <button class="originalUrlCopy btn 
+                                            bg-[#2c87c5]
+                                            border border-gray-300 px-3 py-2 
+                                            rounded-r-md
+                                            focus:outline-none focus:ring-2 focus:ring-indigo-500 
+                                            focus:border-indigo-500" 
+                                            type="button">
+                                            Copy
+                                        </button>
+                                    </div> 
+                                    <div class="flex mb-3">
+                                        <lable class="dark:bg-gray-700 bg-teal-400  
+                                            border border-gray-300 px-4 py-2 
+                                            rounded-l-md bg-white
+                                            focus:outline-none focus:ring-2 focus:ring-indigo-500 
+                                            focus:border-indigo-500" >
+                                            ShortUrl:
+                                        </lable>
+                                        <input type="text" 
+                                            class="shortUrl form-input border  
+                                            px-3 py-2 
+                                            border-gray-300 dark:border-gray-700 
+                                            dark:bg-gray-900 dark:text-gray-300 
+                                            focus:border-indigo-500 dark:focus:border-indigo-600 
+                                            focus:ring-indigo-500 dark:focus:ring-indigo-600 
+                                            rounded-md shadow-sm block w-full" 
+                                            value="${host}/${data?.data?.short_url}"
+                                            readonly>
+                                        <button class="shortUrlCopy btn 
+                                            bg-[#2c87c5]
+                                            border border-gray-300 px-3 py-2 
+                                            rounded-r-md
+                                            focus:outline-none focus:ring-2 focus:ring-indigo-500 
+                                            focus:border-indigo-500" 
+                                            type="button">
+                                            Copy
+                                        </button>
+                                    </div>  
+                                    <div class="text-center">Number of Clicks: ${data?.data?.Number_of_clicks}</div>
+                            </div>                        
+                        `); 
                     }
-                    $('#shortUrl').html(`<a href="${host}/${data?.data?.short_url}" target="_blank">${host}/${data?.data?.short_url}</a>`);
+                    $('#shortUrl').html(`<lable class="dark:bg-gray-700 bg-teal-400  
+                                            border border-gray-300 px-4 py-2 
+                                            rounded-l-md bg-white
+                                            focus:outline-none focus:ring-2 focus:ring-indigo-500 
+                                            focus:border-indigo-500" >
+                                            ShortUrl:
+                                        </lable>
+                                        <input type="text" 
+                                            class="form-input border  
+                                            px-3 py-2 
+                                            border-gray-300 dark:border-gray-700 
+                                            dark:bg-gray-900 dark:text-gray-300 
+                                            focus:border-indigo-500 dark:focus:border-indigo-600 
+                                            focus:ring-indigo-500 dark:focus:ring-indigo-600 
+                                            rounded-md shadow-sm block w-full" 
+                                            value="${host}/${data?.data?.short_url}"
+                                            readonly>
+                                        <button class="shortUrlCopy btn 
+                                            bg-[#2c87c5]
+                                            border border-gray-300 px-3 py-2 
+                                            rounded-r-md
+                                            focus:outline-none focus:ring-2 focus:ring-indigo-500 
+                                            focus:border-indigo-500" 
+                                            type="button">
+                                            Copy
+                                        </button>`);
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -89,7 +181,29 @@ $(document).ready(function() {
                 }
             }
         })
-    })    
+    })   
+    
+    $('#Urldata').on('click', '.originalUrlCopy', function() {
+        let originalUrl = $(this).closest('div').find('.originalUrl').val();
+        if (originalUrl) {
+            navigator.clipboard.writeText(originalUrl).then(function() {
+                alert("Original URL copied to clipboard!");
+            }).catch(function(error) {
+                console.error("Failed to copy text: ", error);
+            });
+        }
+    });
+
+    $('#Urldata').on('click', '.shortUrlCopy', function() {
+        let shortUrl = $(this).closest('div').find('.shortUrl').val();
+        if (shortUrl) {
+            navigator.clipboard.writeText(shortUrl).then(function() {
+                alert("Short URL copied to clipboard!");
+            }).catch(function(error) {
+                console.error("Failed to copy text: ", error);
+            });
+        }
+    });
 })
 function showData() {
     $('#Urldata').empty();
@@ -99,23 +213,65 @@ function showData() {
         dataType:'json',
         success:function(data){
            if(data?.data?.length > 0){
-               let UrlData = data?.data?.map(x=>`
+               let UrlData = data?.data?.map(x=>`               
                <div class="mt-4 p-2 flex rounded-lg h-full dark:bg-gray-700 bg-teal-400 flex-col">
-                   <div class="w-full text-wrap overflow-hidden ">
-                        <x-input-label :value="__('Original Url:')" />
-                        <x-text-input class="block mt-1 w-full"
+                    <div class="flex mb-3">
+                        <lable class="dark:bg-gray-700 bg-teal-400  
+                            border border-gray-300 px-4 py-2 
+                            rounded-l-md bg-white
+                            focus:outline-none focus:ring-2 focus:ring-indigo-500 
+                            focus:border-indigo-500" >
+                            OriginalUrl:
+                        </lable>
+                        <input type="text" 
+                            class="form-input border  
+                            px-3 py-2 
+                            border-gray-300 dark:border-gray-700 
+                            dark:bg-gray-900 dark:text-gray-300 
+                            focus:border-indigo-500 dark:focus:border-indigo-600 
+                            focus:ring-indigo-500 dark:focus:ring-indigo-600 
+                            rounded-md shadow-sm block w-full" 
                             value="${x?.original_url}"
-                            readonly
-                        />
+                            readonly>
+                        <button class="originalUrlCopy btn 
+                            bg-[#2c87c5]
+                            border border-gray-300 px-3 py-2 
+                            rounded-r-md
+                            focus:outline-none focus:ring-2 focus:ring-indigo-500 
+                            focus:border-indigo-500" 
+                            type="button">
+                            Copy
+                        </button>
                     </div> 
-                   <div  class="w-full text-wrap overflow-hidden ">
-                    <x-input-label :value="__('Short Url:')" />
-                    <x-text-input class="block mt-1 w-full"
+                    <div class="flex mb-3">
+                        <lable class="dark:bg-gray-700 bg-teal-400  
+                            border border-gray-300 px-4 py-2 
+                            rounded-l-md bg-white
+                            focus:outline-none focus:ring-2 focus:ring-indigo-500 
+                            focus:border-indigo-500" >
+                            ShortUrl:
+                        </lable>
+                        <input type="text" 
+                            class="form-input border  
+                            px-3 py-2 
+                            border-gray-300 dark:border-gray-700 
+                            dark:bg-gray-900 dark:text-gray-300 
+                            focus:border-indigo-500 dark:focus:border-indigo-600 
+                            focus:ring-indigo-500 dark:focus:ring-indigo-600 
+                            rounded-md shadow-sm block w-full" 
                             value="${host}/${x?.short_url}"
-                            readonly
-                        />
-                    </div> 
-                   <div>Number of Clicks: ${x?.Number_of_clicks}</div>
+                            readonly>
+                        <button class="shortUrlCopy btn 
+                            bg-[#2c87c5]
+                            border border-gray-300 px-3 py-2 
+                            rounded-r-md
+                            focus:outline-none focus:ring-2 focus:ring-indigo-500 
+                            focus:border-indigo-500" 
+                            type="button">
+                            Copy
+                        </button>
+                    </div>  
+                    <div class="text-center">Number of Clicks: ${x?.Number_of_clicks}</div>
                </div>`);
                $('#Urldata').append(UrlData);
            }else{
